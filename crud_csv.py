@@ -48,22 +48,24 @@ def criar_aluno():
         fieldNames = ['MATRICULA', 'NOME', 'CELULAR']
         # writer = csv.DictWriter(csvFile, fieldnames=fieldNames, delimiter=',')
         writer = csv.DictWriter(csvFile, fieldnames=fieldNames)
-        matriculainput = input("Matricula : ")
+        matriculainput = input("Matricula (9 digitos) : ")
         nome = input("Nome Completo : ")
-        celular = input("Numero de telefone : ")
+        celular = input("Numero de telefone (DDD 9--------): ")
         writer.writerow({'MATRICULA' : matriculainput, 'NOME': nome, 'CELULAR': celular})
         print("Aluno cadastrado")
+        back_to_menu()
 
 def registrar_info():
     clear_screen()
     with open(cursoEmail, mode='a', newline="") as csvFile:
         fieldNames = ['MATRICULA', 'CURSO', 'EMAIL']
         writer = csv.DictWriter(csvFile, fieldnames=fieldNames, delimiter=',')
-        matricula = input("Matricula : ")
-        curso = input("Curso : ")
+        matricula = input("Matricula (9 digitos) : ")
+        curso = input("Curso sem abreviações : ")
         email = input("E-MAIL : ")
         writer.writerow({'MATRICULA' : matricula, 'CURSO' : curso, 'EMAIL': email})
         print("Informações cadastradas")
+        back_to_menu()
 
 def editar_contato():
     clear_screen()
@@ -72,9 +74,9 @@ def editar_contato():
         csvReader = csv.DictReader(csvFile, delimiter=',')
         for row in csvReader:
             contacts.append(row)
-    print(f'MATRICULA \t\t NOME \t\t CELULAR')
+    print(f'MATRICULA \t NOME \t CELULAR')
     for data in contacts:
-        print(f'''{data['MATRICULA']} \t\t {data['NOME']} \t\t {data['CELULAR']}''')
+        print(f'''{data['MATRICULA']} \t {data['NOME']} \t {data['CELULAR']}''')
     matricula = input("MATRICULA : ")
     nome = input("Novo nome : ")
     celular = input("Novo numero : ")
@@ -90,6 +92,7 @@ def editar_contato():
         writer.writeheader()
         for newData in contacts:
             writer.writerow({'MATRICULA': newData['MATRICULA'],'NOME': newData['NOME'] ,'CELULAR': newData['CELULAR'] })
+        back_to_menu()
 
 def editar_info():
     clear_screen()
@@ -117,6 +120,7 @@ def editar_info():
         writer.writeheader()
         for newData in contacts:
             writer.writerow({'MATRICULA': newData['MATRICULA'], 'CURSO': newData['CURSO'], 'EMAIL': newData['EMAIL']})
+        back_to_menu()
 
 def deletar_aluno():
     global matriculadel
@@ -125,9 +129,9 @@ def deletar_aluno():
         csvReader = csv.DictReader(csvFile, delimiter=',')
         for row in csvReader:
             contacts.append(row)
-    print(f'MATRICULA \t NOME COMPLETO \t CELULAR')
+    print(f'MATRICULA \t CELULAR \t NOME COMPLETO')
     for data in contacts:
-        print(f"{data['MATRICULA']} \t {data['NOME']} \t {data['CELULAR']}")
+        print(f"{data['MATRICULA']} \t {data['CELULAR']} \t {data['NOME']} ")
     print("-"*12)
     matriculadel = input("Delete MATRICULA :")
     index = 0
@@ -163,6 +167,7 @@ def deletar_info():
         writer.writeheader()
         for newData in contacts:
             writer.writerow({'MATRICULA': newData['MATRICULA'],'CURSO': newData['CURSO'], 'EMAIL': newData['EMAIL']})
+        back_to_menu()
 
 def consultar_aluno():
     clear_screen()
@@ -195,7 +200,6 @@ Celular: {data_found['CELULAR']}
 Curso: {email_found['CURSO']} 
 Email: {email_found['EMAIL']}''')
 
-
 if __name__ == "__main__":
     #while True:
     show_menu()
@@ -205,8 +209,9 @@ def registrar_info():
     with open(cursoEmail, mode='a', newline="") as csvFile:
         fieldNames = ['MATRICULA', 'CURSO', 'EMAIL']
         writer = csv.DictWriter(csvFile, fieldnames=fieldNames, delimiter=',')
-        matriculai = input("Matrícula : ")
-        curso = input("Curso : ")
+        matriculai = input("Matrícula (9 digitos): ")
+        curso = input("Curso sem abreviações : ")
         email = input("E-mail : ")
         writer.writerow({'MATRICULA' : matriculai, 'CURSO' : curso, 'EMAIL': email})
         print("Informações cadastradas")
+    back_to_menu()
